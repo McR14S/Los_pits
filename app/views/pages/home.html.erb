@@ -1,0 +1,27 @@
+<div class="video-overlay">
+  <video autoplay loop muted class="fullscreen-video">
+    <source src="<%= asset_path('lobby/video.mp4') %>" type="video/mp4">
+    
+  </video>
+</div>
+
+<div class="video-overlay">
+  <video autoplay loop muted class="fullscreen-video">
+    <source src="<%= asset_path('lobby/video.mp4') %>" type="video/mp4">
+    
+  </video>
+</div>
+
+<div class="text-overlay">
+  <div class="flex flex-col justify-center items-center h-full">
+    <h2 class="text-6xl font-bold text-white text-center">
+      <%= t('.welcome') %>
+    </h2>
+
+    <h1 class="text-8xl font-bold text-white mt-4 text-center">
+      <% app_name = t('.app_name') %>
+      <%= content_tag(:span, app_name[0...(app_name.length / 2)], class: "text-white") %>
+      <%= content_tag(:span, app_name[(app_name.length / 2)..-1], class: "text-orange-500") %>
+    </h1>
+  </div>
+</div>

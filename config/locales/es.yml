@@ -1,5 +1,5 @@
 es:
-  app_name: 'MusicPro'
+  app_name: 'Los Pits'
   meta_title: 'Bodega especializada en artículos de música'
   activerecord:
     models:
@@ -18,6 +18,10 @@ es:
         password: 'Contraseña'
       category:
         name: 'Nombre'
+  pages:
+    home:
+      welcome: 'Bienvenido a'
+      app_name: 'Los Pits'
   common:
     confirm: '¿Estás seguro?'
     back: 'Volver'
@@ -26,8 +30,11 @@ es:
     not_found: 'No se ha encontrado'
   shared:
     items:
+      lobby: 'Inicio'
+      products: 'Productos'
+      aboutus: 'Nosotros'
       add: 'Añadir producto'
-      login: 'Iniciar'
+      login: 'Autenticar'
       register: 'Registrar'
       logout: 'Desconectar'
       categories: 'Categorias'

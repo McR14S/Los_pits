@@ -31,8 +31,6 @@
 
 
 # Produccion!
-- https://musicpro.fly.dev/
-
 - fly auth signup
 - fly launch
 

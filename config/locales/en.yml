@@ -1,5 +1,5 @@
 en:
-  app_name: 'MusicPro'
+  app_name: 'The Pits'
   meta_title: 'Warehouse specialized in music items'
   activerecord:
     models:
@@ -18,6 +18,10 @@ en:
         password: 'Password'
       category:
         name: 'Name'
+  pages:
+    home:
+      welcome: 'Welcome to'
+      app_name: 'The Pits'
   common:
     confirm: 'Are you sure?'
     back: 'Go back'
@@ -26,6 +30,9 @@ en:
     not_found: 'Not found'
   shared:
     items:
+      lobby: 'Home'
+      products': 'products'
+      aboutus: 'about us'
       add: 'Add product'
       login: 'Login'
       register: 'Register'

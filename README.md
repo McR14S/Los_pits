@@ -7,7 +7,7 @@
 - PostgreSQL 15.3 (Omitir buildkit)
 
 # Pasos:
-- git clone https://github.com/McR14S/Bodega_MuscPro.git
+- git clone https://github.com/McR14S/Los_pits.git
 - Navegar hasta el directorio del repositorio (cd/"name")
 - Modificar config/database.yml por tus datos (esta todo por defecto en postgres, solo cambiar contraseña)
 - bundle install

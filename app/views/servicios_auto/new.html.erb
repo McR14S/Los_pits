@@ -1,0 +1,35 @@
+<div class="bg-slate-300 container mx-auto my-auto rounded-md border px-4">
+  <h1 class="text-3xl font-bold mb-6">Agendar Servicio</h1>
+
+  <%= form_with(model: @servicio, url: new_servicios_auto_path, local: true) do |form| %>
+
+    <div class="mb-6">
+      <%= form.label :servicio, 'Seleccionar un servicio:', class: "block text-gray-700 font-bold mb-2" %>
+      <%= form.select :servicio, options_for_select(['Diagnóstico avanzado', 'Mantenimiento especializado', 'Reparaciones integrales', 'Atención personalizada']), class: "block w-full p-2 border border-gray-300 rounded-md" %>
+    </div>
+
+    <div class="mb-6">
+      <%= form.label :modelo, 'Modelo de vehículo:', class: "block text-gray-700 font-bold mb-2" %>
+      <%= form.text_field :modelo, class: "block w-full p-2 border border-gray-300 rounded-md" %>
+    </div>
+
+    <div class="mb-6">
+      <%= form.label :patente, 'Patente:', class: "block text-gray-700 font-bold mb-2" %>
+      <%= form.text_field :patente, class: "block w-full p-2 border border-gray-300 rounded-md" %>
+    </div>
+
+    <div class="mb-6">
+      <%= form.label :fecha, 'Fecha y Hora:', class: "block text-gray-700 font-bold mb-2" %>
+      <%= form.datetime_local_field :fecha, class: "block w-full p-2 border border-gray-300 rounded-md" %>
+    </div>
+
+    <div class="mb-6">
+      <%= form.label :comentario, 'Comentario:', class: "block text-gray-700 font-bold mb-2" %>
+      <%= form.text_area :comentario, class: "block w-full p-2 border border-gray-300 rounded-md resize-none" %>
+    </div>
+
+    <div class="mb-6">
+      <%= form.submit 'Enviar', class: "bg-orange-500 text-white font-bold py-2 px-4 rounded" %>
+    </div>
+  <% end %>
+</div>

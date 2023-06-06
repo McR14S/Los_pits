@@ -1,5 +1,7 @@
 <%= link_to t('.lobby'), root_path, class: "mx-2 text-white font-bold hover:scale-105 hover:underline hover:text-2xl hover:text-orange-500 transition-all" %>
 
+<%= link_to t('.services'), new_servicios_auto_path, class: "mx-2 text-white font-bold hover:scale-105 hover:underline hover:text-2xl hover:text-orange-500 transition-all" if Current.user %>
+
 <%= link_to t('.products'), products_path, class: "mx-2 text-white font-bold hover:scale-105 hover:underline hover:text-2xl hover:text-orange-500 transition-all" %>
 
 <%= link_to t('.aboutus'), about_us_path, class: "mx-2 text-white font-bold hover:scale-105 hover:underline hover:text-2xl hover:text-orange-500 transition-all" %>

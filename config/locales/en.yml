@@ -31,8 +31,9 @@ en:
   shared:
     items:
       lobby: 'Home'
-      products': 'products'
-      aboutus: 'about us'
+      services: 'Services'
+      products': 'Products'
+      aboutus: 'About us'
       add: 'Add product'
       login: 'Login'
       register: 'Register'

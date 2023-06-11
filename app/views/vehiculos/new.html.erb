@@ -1,36 +1,38 @@
-<div class="bg-slate-300 container mx-auto my-auto rounded-md border px-4">
-  <h1 class="text-3xl font-bold mb-6">Agregar Vehiculo</h1>
+<div class="bg-slate-300 min-h-screen flex items-center justify-center">
+  <div class="w-full max-w-md p-6 bg-white rounded-md shadow-md">
+    <h1 class="text-3xl font-bold mb-6">Agregar Vehículo</h1>
 
-  <%= form_with(model: @vehiculo, url: vehiculos_path, local: true) do |form| %>
+    <%= form_with(model: @vehiculo, url: vehiculos_path, local: true) do |form| %>
 
-    <% @vehiculo.errors.full_messages.each do |error| %>
-      <div>
+      <% @vehiculo.errors.full_messages.each do |error| %>
+        <div class="text-red-500">
           <%= error %>
+        </div>
+      <% end %>
+
+      <div class="mb-6">
+        <%= form.label :modelo_vehiculo, 'Modelo de vehículo:', class: "block text-gray-700 font-bold mb-2" %>
+        <%= form.text_field :modelo_vehiculo, class: "block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent" %>
+      </div>
+
+      <div class="mb-6">
+        <%= form.label :patente_vehiculo, 'Patente:', class: "block text-gray-700 font-bold mb-2" %>
+        <%= form.text_field :patente_vehiculo, class: "block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent" %>
+      </div>
+
+      <div class="mb-6">
+        <%= form.label :marca_vehiculo, 'Marca de vehículo:', class: "block text-gray-700 font-bold mb-2" %>
+        <%= form.text_field :marca_vehiculo, class: "block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent" %>
+      </div>
+
+      <div class="mb-6">
+        <%= form.label :color_vehiculo, 'Color de vehículo:', class: "block text-gray-700 font-bold mb-2" %>
+        <%= form.text_field :color_vehiculo, class: "block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent" %>
+      </div>
+
+      <div class="mb-6">
+        <%= form.submit 'Enviar', class: "bg-orange-500 text-white font-bold py-2 px-4 rounded hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2" %>
       </div>
     <% end %>
-
-    <div class="mb-6">
-      <%= form.label :modelo_vehiculo, 'Modelo de vehículo:', class: "block text-gray-700 font-bold mb-2" %>
-      <%= form.text_field :modelo_vehiculo, class: "block w-full p-2 border border-gray-300 rounded-md" %>
-    </div>
-
-    <div class="mb-6">
-      <%= form.label :patente_vehiculo, 'Patente:', class: "block text-gray-700 font-bold mb-2" %>
-      <%= form.text_field :patente_vehiculo, class: "block w-full p-2 border border-gray-300 rounded-md" %>
-    </div>
-
-    <div class="mb-6">
-      <%= form.label :marca_vehiculo, 'Marca de vehículo:', class: "block text-gray-700 font-bold mb-2" %>
-      <%= form.text_field :marca_vehiculo, class: "block w-full p-2 border border-gray-300 rounded-md" %>
-    </div>
-
-    <div class="mb-6">
-      <%= form.label :color_vehiculo, 'Color de vehículo:', class: "block text-gray-700 font-bold mb-2" %>
-      <%= form.text_field :color_vehiculo, class: "block w-full p-2 border border-gray-300 rounded-md" %>
-    </div>
-
-    <div class="mb-6">
-      <%= form.submit 'Enviar', class: "bg-orange-500 text-white font-bold py-2 px-4 rounded" %>
-    </div>
-  <% end %>
+  </div>
 </div>

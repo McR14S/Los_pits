@@ -11,6 +11,7 @@ class ServiciosAutoController < ApplicationController
     if @servicio.save
       redirect_to root_path, notice: 'El servicio ha sido agendado exitosamente.'
     else
+      @vehiculos = Current.user.vehiculos if Current.user
       render :new, status: :unprocessable_entity
     end
   end

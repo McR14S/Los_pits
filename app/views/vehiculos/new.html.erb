@@ -27,7 +27,10 @@
 
       <div class="mb-6">
         <%= form.label :color_vehiculo, 'Color de vehículo:', class: "block text-gray-700 font-bold mb-2" %>
-        <%= form.text_field :color_vehiculo, class: "block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent" %>
+        <div class="relative inline-block w-full">
+          <%= form.color_field :color_vehiculo, class: "block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent appearance-none" %>
+          <div class="absolute inset-0 rounded-full bg-gray-200" style="pointer-events: none;"></div>
+        </div>
       </div>
 
       <div class="mb-6">

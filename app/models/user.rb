@@ -1,5 +1,6 @@
 class User < ApplicationRecord
     has_secure_password
+    belongs_to :vehiculo
 
     validates :email, presence: true, uniqueness: true,
         format: {
@@ -16,6 +17,7 @@ class User < ApplicationRecord
 
     has_many :products, dependent: :destroy
     has_many :favorites, dependent: :destroy
+    has_many :vehiculos, dependent: :destroy
 
     before_save :downcase_attributes
 

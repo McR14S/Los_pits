@@ -12,7 +12,12 @@ Rails.application.routes.draw do
     resources :sessions, only: [:new, :create, :destroy], path: '/login', path_names: { new: '/'}
   end
 
-  resources :servicios_auto, only: [:new, :create]
+  #servicios
+  resources :servicios_auto, only: [:new]
+  post '/servicios_auto', to: 'servicios_auto#create'
+  get '/obtener_patente', to: 'servicios_auto#obtener_patente'
+
+  get '/perfil', to: 'perfil#show'
   resources :favorites, only: [:index, :create, :destroy], param: :product_id
   resources :users, only: :show, path: '/user', param: :username
   resources :categories, except: :show
@@ -21,4 +26,9 @@ Rails.application.routes.draw do
 
   # Ruta para la página about_us en la carpeta lobby
   get '/about_us', to: 'pages#about_us', as: 'about_us'
+
+  #Vehiculo
+  resources :vehiculos, only: [:new]
+  post '/vehiculos', to: 'vehiculos#create'
+
 end

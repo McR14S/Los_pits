@@ -32,3 +32,8 @@
 
 /app/assets/builds/*
 !/app/assets/builds/.keep
+
+# Ignore Gemfile, Gemfile.lock, and ruby-version
+/Gemfile
+/Gemfile.lock
+/.ruby-version

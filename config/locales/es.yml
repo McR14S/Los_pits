@@ -1,6 +1,6 @@
 es:
   app_name: 'Los Pits'
-  meta_title: 'Bodega especializada en artículos de música'
+  meta_title: ¡Pagina especializada para tu vehiculo!'
   activerecord:
     models:
       product: Producto

@@ -1,6 +1,6 @@
 en:
   app_name: 'The Pits'
-  meta_title: 'Warehouse specialized in music items'
+  meta_title: 'Specialized page for your vehicle!'
   activerecord:
     models:
       product: Product

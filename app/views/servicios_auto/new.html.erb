@@ -1,30 +1,46 @@
 <div class="bg-slate-300 container mx-auto my-auto rounded-md border px-4">
   <h1 class="text-3xl font-bold mb-6">Agendar Servicio</h1>
 
-  <%= form_with(model: @servicio, url: new_servicios_auto_path, local: true) do |form| %>
+  <%= form_with(model: @servicio, url: servicios_auto_path, local: true) do |form| %>
+
+    <% @servicio.errors.full_messages.each do |error| %>
+      <div>
+          <%= error %>
+      </div>
+    <% end %>
 
     <div class="mb-6">
       <%= form.label :servicio, 'Seleccionar un servicio:', class: "block text-gray-700 font-bold mb-2" %>
-      <%= form.select :servicio, options_for_select(['Diagnóstico avanzado', 'Mantenimiento especializado', 'Reparaciones integrales', 'Atención personalizada']), class: "block w-full p-2 border border-gray-300 rounded-md" %>
+      <%= form.select :tipo_servicio, options_for_select(['Diagnóstico avanzado', 'Mantenimiento especializado', 'Reparaciones integrales', 'Atención personalizada']), class: "block w-full p-2 border border-gray-300 rounded-md" %>
     </div>
 
     <div class="mb-6">
       <%= form.label :modelo, 'Modelo de vehículo:', class: "block text-gray-700 font-bold mb-2" %>
-      <%= form.text_field :modelo, class: "block w-full p-2 border border-gray-300 rounded-md" %>
+      <% if @vehiculos.present? %>
+        <%= form.select :modelo_vehiculo, options_for_select(@vehiculos.pluck(:modelo_vehiculo)),
+        class: "block w-full p-2 border border-gray-300 rounded-md", id: "modelo_vehiculo", data: { action: "change->serviciosAuto#obtenerPatente" } %>
+      <% else %>
+        <p>No se encontraron autos disponibles.</p>
+      <% end %>
     </div>
 
     <div class="mb-6">
       <%= form.label :patente, 'Patente:', class: "block text-gray-700 font-bold mb-2" %>
-      <%= form.text_field :patente, class: "block w-full p-2 border border-gray-300 rounded-md" %>
+      <%= form.text_field :patente_vehiculo, class: "block w-full p-2 border border-gray-300 rounded-md", id: "patente-field", readonly: true %>
     </div>
 
     <div class="mb-6">
-      <%= form.label :fecha, 'Fecha y Hora:', class: "block text-gray-700 font-bold mb-2" %>
-      <%= form.datetime_local_field :fecha, class: "block w-full p-2 border border-gray-300 rounded-md" %>
+      <%= form.label 'Fecha:', class: "block text-gray-700 font-bold mb-2" %>
+      <%= form.date_field :fecha, class: "block w-full p-2 border border-gray-300 rounded-md" %>
     </div>
 
     <div class="mb-6">
-      <%= form.label :comentario, 'Comentario:', class: "block text-gray-700 font-bold mb-2" %>
+      <%= form.label 'Hora:', class: "block text-gray-700 font-bold mb-2" %>
+      <%= form.select :hora, options_for_select(['09:00', '10:00', '11:00', '12:00', '13:00']), class: "block w-full p-2 border border-gray-300 rounded-md" %>
+    </div>
+
+    <div class="mb-6">
+      <%= form.label 'Comentario:', class: "block text-gray-700 font-bold mb-2" %>
       <%= form.text_area :comentario, class: "block w-full p-2 border border-gray-300 rounded-md resize-none" %>
     </div>
 
@@ -33,3 +49,25 @@
     </div>
   <% end %>
 </div>
+
+
+
+<script>
+  document.addEventListener('turbo:load', function() {
+    var modeloVehiculoSelect = document.getElementById('servicio_modelo_vehiculo');
+    var patenteVehiculoField = document.getElementById('patente-field');
+
+    modeloVehiculoSelect.addEventListener('change', function() {
+      var selectedModeloVehiculo = this.value;
+
+      fetch('/obtener_patente?modelo=' + selectedModeloVehiculo)
+        .then(response => response.json())
+        .then(data => {
+          patenteVehiculoField.value = data.patente;
+        })
+        .catch(error => {
+          console.error('Error al obtener la patente:', error);
+        });
+    });
+  });
+</script>

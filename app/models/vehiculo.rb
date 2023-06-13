@@ -1,7 +1,7 @@
 class Vehiculo < ApplicationRecord
 
     validates :modelo_vehiculo, presence: true
-    validates :patente_vehiculo, presence: true
+    validates :patente_vehiculo, presence: true, uniqueness: true
     validates :marca_vehiculo, presence: true
     validates :color_vehiculo, presence: true
 

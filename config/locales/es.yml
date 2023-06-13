@@ -60,7 +60,7 @@ es:
       description_placeholder: '¿Puedes describir el producto?'
       price_placeholder: '¿Cuánto cuesta?'
       category_placeholder: '¿En qué categoría encaja mejor?'
-      submit: 'MusicPro!'
+      submit: 'Los Pits!'
     index:
       title: 'Productos:'
       all: 'Todos'
@@ -102,5 +102,5 @@ es:
       title: 'Mis favoritos'
   user_mailer:
     welcome:
-      subject: 'Bienvenido a Musicpro!'
-      welcome_message: 'Hey %{username}, Bienvenido a MusicPro!'
+      subject: 'Bienvenido a Los Pits!'
+      welcome_message: 'Hey %{username}, Bienvenido a Los Pits!'

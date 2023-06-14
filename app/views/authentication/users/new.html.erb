@@ -29,6 +29,13 @@
           <%= form.password_field :password, required: true, class: "w-full border border-gray-300 focus:border-teal-400 focus:ring focus:ring-teal-400 focus:ring-opacity-50 rounded-md p-2" %>
         </div>
 
+        <% if Current.user&.superadmin? %>
+          <div class="mb-4">
+            <%= form.label :admin, class: "text-gray-700 font-bold" %>
+            <%= form.check_box :admin %>
+          </div>
+        <% end %>
+
         <div>
           <%= form.submit "Registrar", class: "bg-teal-400 hover:bg-teal-500 text-white font-bold py-2 px-4 rounded-md" %>
         </div>

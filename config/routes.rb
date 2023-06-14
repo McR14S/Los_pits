@@ -19,7 +19,11 @@ Rails.application.routes.draw do
 
   get '/perfil', to: 'perfil#show'
   resources :favorites, only: [:index, :create, :destroy], param: :product_id
-  resources :users, only: :show, path: '/user', param: :username
+
+  #User
+  resources :users, only: [:index], path: '/user', param: :username
+  get '/users/:id/edit', to: 'users#edit', as: 'edit_user'
+
   resources :categories, except: :show
   #refactor
   resources :products, path: '/products'

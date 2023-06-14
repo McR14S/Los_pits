@@ -7,9 +7,10 @@ class ServiciosAutoController < ApplicationController
   end
 
   def index
-    # Aquí puedes implementar la lógica para mostrar servicios
+    authorize_admin!
     @servicios = Servicio.all
   end
+  
 
   def create
     @servicio = Servicio.new(servicio_params)
@@ -34,4 +35,11 @@ class ServiciosAutoController < ApplicationController
   def servicio_params
     params.require(:servicio).permit(:tipo_servicio, :modelo_vehiculo, :patente_vehiculo, :fecha, :hora, :comentario)
   end
+
+  def authorize_admin!
+    unless Current.user.superadmin?
+      redirect_to root_path, alert: 'No tienes permisos de administrador.'
+    end
+  end
+  
 end

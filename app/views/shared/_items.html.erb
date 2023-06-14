@@ -1,12 +1,11 @@
 <div class="relative flex flex-col sm:flex-row">
-  <!-- Menú principal -->
 
   <!-- Submenu -->
   <% if Current.user && (Current.user.admin? || Current.user.superadmin?) %>
     <div class="relative group">
       <span class="mx-2 text-white font-bold hover:scale-105 hover:underline hover:text-orange-500 transition-all">Administrador</span>
       <div class="absolute bg-black p-4 rounded-md shadow-lg hidden group-hover:block z-10 mt-8">
-        <%= link_to t('.categories'), categories_path, class: "block my-2 text-white hover:text-orange-500"%> 
+        <%= link_to t('.categories'), categories_path, class: "block my-2 text-white hover:text-orange-500"  %> 
         <%= link_to t('.add'), new_product_path, class: "block my-2 text-white hover:text-orange-500", data: { turbo_frame: "modal" }%>            
         <!-- Aqui super administradores -->
         <%= link_to t('.services'), servicios_auto_path, class: "block my-2 text-white hover:text-orange-500" if Current.user.superadmin? %>

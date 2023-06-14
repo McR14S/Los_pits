@@ -1,24 +1,34 @@
-<%= link_to t('.lobby'), root_path, class: "mx-2 text-white font-bold hover:scale-105 hover:underline hover:text-2xl hover:text-orange-500 transition-all" %>
+<div class="relative flex flex-col sm:flex-row">
+  <!-- Menú principal -->
 
-<%= link_to t('.services'), new_servicios_auto_path, class: "mx-2 text-white font-bold hover:scale-105 hover:underline hover:text-2xl hover:text-orange-500 transition-all" if Current.user %>
+  <!-- Submenu -->
+  <% if Current.user && (Current.user.admin? || Current.user.superadmin?) %>
+    <div class="relative group">
+      <span class="mx-2 text-white font-bold hover:scale-105 hover:underline hover:text-orange-500 transition-all">Administrador</span>
+      <div class="absolute bg-black p-4 rounded-md shadow-lg hidden group-hover:block z-10 mt-8">
+        <%= link_to t('.categories'), categories_path, class: "block my-2 text-white hover:text-orange-500"%> 
+        <%= link_to t('.add'), new_product_path, class: "block my-2 text-white hover:text-orange-500", data: { turbo_frame: "modal" }%>            
+        <!-- Aqui super administradores -->
+        <%= link_to t('.services'), servicios_auto_path, class: "block my-2 text-white hover:text-orange-500" if Current.user.superadmin? %>
+      </div>
+    </div>
+  <% end %>
 
-<%= link_to t('.products'), products_path, class: "mx-2 text-white font-bold hover:scale-105 hover:underline hover:text-2xl hover:text-orange-500 transition-all" %>
+  <!-- Resto del menú -->
 
-<%= link_to t('.aboutus'), about_us_path, class: "mx-2 text-white font-bold hover:scale-105 hover:underline hover:text-2xl hover:text-orange-500 transition-all" %>
+  <%= link_to t('.lobby'), root_path, class: "mx-2 text-white font-bold hover:scale-105 hover:underline hover:text-2xl hover:text-orange-500 transition-all" %>
+  <%= link_to t('.services'), new_servicios_auto_path, class: "mx-2 text-white font-bold hover:scale-105 hover:underline hover:text-2xl hover:text-orange-500 transition-all" if Current.user && !Current.user.admin? && !Current.user.superadmin? %>
+  <%= link_to t('.products'), products_path, class: "mx-2 text-white font-bold hover:scale-105 hover:underline hover:text-2xl hover:text-orange-500 transition-all" %>
+  <%= link_to t('.aboutus'), about_us_path, class: "mx-2 text-white font-bold hover:scale-105 hover:underline hover:text-2xl hover:text-orange-500 transition-all" %>
+  <%= link_to 'Agregar Vehiculo', new_vehiculo_path, class: "mx-2 text-white font-bold hover:scale-105 hover:underline hover:text-2xl hover:text-orange-500 transition-all" if Current.user && !Current.user.admin? && !Current.user.superadmin? %>
+  <%= link_to t('.favorites'), favorites_path, class: "mx-2 text-white font-bold hover:scale-105 hover:underline hover:text-2xl hover:text-orange-500 transition-all" if Current.user && !Current.user.admin? && !Current.user.superadmin? %>
+  <%= link_to t('.login'), new_session_path, class: "mx-2 text-white font-bold hover:scale-105 hover:underline hover:text-2xl hover:text-orange-500 transition-all" unless Current.user %>
+  <%= link_to t('.register'), new_user_path, class: "mx-2 text-white font-bold hover:scale-105 hover:underline hover:text-2xl hover:text-orange-500 transition-all" unless Current.user %>
+  <%= link_to t('.logout'), session_path(Current.user.id), data: { turbo_method: :delete, turbo_confirm: t('common.confirm') }, class: "mx-2 text-white font-bold hover:scale-105 hover:underline hover:text-2xl hover:text-orange-500 transition-all" if Current.user %>
+</div>
 
-<%= link_to 'Agregar Vehiculo', new_vehiculo_path, class: "mx-2 text-white font-bold hover:scale-105 hover:underline hover:text-2xl hover:text-orange-500 transition-all" if Current.user%>
-
-<%= link_to t('.add'), new_product_path, class: "mx-2 text-white font-bold hover:scale-105 hover:underline hover:text-2xl hover:text-orange-500 transition-all", data: { turbo_frame: "modal" } if Current.user&.admin? %>
-
-<%= link_to t('.favorites'), favorites_path, class: "mx-2 text-white font-bold hover:scale-105 hover:underline hover:text-2xl hover:text-orange-500 transition-all" if Current.user %>
-
-<%= link_to t('.categories'), categories_path, class: "mx-2 text-white font-bold hover:scale-105 hover:underline hover:text-2xl hover:text-orange-500 transition-all" if Current.user&.admin? %>
-
-<%= link_to t('.login'), new_session_path, class: "mx-2 text-white font-bold hover:scale-105 hover:underline hover:text-2xl hover:text-orange-500 transition-all" unless Current.user %>
-
-<%= link_to t('.register'), new_user_path, class: "mx-2 text-white font-bold hover:scale-105 hover:underline hover:text-2xl hover:text-orange-500 transition-all" unless Current.user %>
-
-<%= link_to t('.logout'), session_path(Current.user.id), data: {
-  turbo_method: :delete,
-  turbo_confirm: t('common.confirm')
-}, class: "mx-2 text-white font-bold hover:scale-105 hover:underline hover:text-2xl hover:text-orange-500 transition-all" if Current.user %>
+<style>
+  .group:hover .absolute {
+    display: block;
+  }
+</style>

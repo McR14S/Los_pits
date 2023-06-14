@@ -15,3 +15,9 @@ pepe:
   email: pepe@vendelo.com
   username: pepito
   password_digest: <%= BCrypt::Password.create('testme', cost: 5) %>
+
+pepe:
+  email: superpepe@vendelo.com
+  username: pepito
+  password_digest: <%= BCrypt::Password.create('testme', cost: 5) %>
+  superadmin: true

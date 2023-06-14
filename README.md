@@ -21,6 +21,10 @@
 - windows = rails server
 -         = rails tailwindcss:watch
 
+# Usuarios
+- admin: paco@vendelo.com pass:testme
+- superadmin: superpepe@vendelo.com pass:testme
+
 
 # Soluciones:
 - bundle add tailwindcss-rails

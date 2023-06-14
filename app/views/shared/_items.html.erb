@@ -9,6 +9,9 @@
         <%= link_to t('.add'), new_product_path, class: "block my-2 text-white hover:text-orange-500", data: { turbo_frame: "modal" }%>            
         <!-- Aqui super administradores -->
         <%= link_to t('.services'), servicios_auto_path, class: "block my-2 text-white hover:text-orange-500" if Current.user.superadmin? %>
+        <%= link_to 'Usuarios', user_index_path, class: "block my-2 text-white hover:text-orange-500" if Current.user.superadmin? %>
+
+
       </div>
     </div>
   <% end %>

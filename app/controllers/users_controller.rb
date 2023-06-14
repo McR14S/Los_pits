@@ -24,30 +24,19 @@ class UsersController < ApplicationController
   end
 
   def edit
-    user
-  end
-
-  def update
-    if user.update(user_params)
-      redirect_to users_path, notice: 'Usuario actualizado exitosamente.'
-    else
-      render :edit, status: :unprocessable_entity
-    end
+    @user = User.find(params[:id])
   end
 
   def destroy
-    user.destroy
+    @user = User.find(params[:id])
+    @user.destroy
     redirect_to users_path, notice: 'Usuario eliminado exitosamente.'
   end
 
   private
 
-  def user
-    @user ||= User.find(params[:id])
-  end
-
   def user_params
-    params.require(:user).permit(:name, :email, :password, :password_confirmation)
+    params.require(:user).permit(:name, :email, :password, :admin, :superadmin)
   end
 
   def authorize_superadmin!

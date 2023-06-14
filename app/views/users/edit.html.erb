@@ -1,0 +1,29 @@
+<h1>Editar Perfil de <%= @user.username %></h1>
+
+<%= form_for(@user, url: edit_user_path(@user.username), method: :patch) do |f| %>
+  <%= render 'shared/error_messages', object: @user %>
+
+  <div class="field">
+    <%= f.label :username %>
+    <%= f.text_field :username %>
+  </div>
+
+  <div class="field">
+    <%= f.label :email %>
+    <%= f.email_field :email %>
+  </div>
+
+  <div class="field">
+    <%= f.label :admin %>
+    <%= f.check_box :admin %>
+  </div>
+
+  <div class="field">
+    <%= f.label :superadmin %>
+    <%= f.check_box :superadmin %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit 'Guardar cambios' %>
+  </div>
+<% end %>

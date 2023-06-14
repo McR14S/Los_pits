@@ -1,4 +1,8 @@
 es:
+  users:
+    edit:
+      common:
+        not_found: 'Usuario no encontrado'
   app_name: 'Los Pits'
   meta_title: ¡Pagina especializada para tu vehiculo!'
   activerecord:

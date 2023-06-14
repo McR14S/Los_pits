@@ -20,6 +20,8 @@ class User < ApplicationRecord
 
     before_save :downcase_attributes
 
+    attr_accessor :admin  # Agrega esta línea para definir el atributo admin
+
     private
     
     def downcase_attributes

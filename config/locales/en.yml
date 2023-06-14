@@ -102,4 +102,4 @@ en:
   user_mailer:
     welcome:
       subject: 'Welcome to Musicpro!'
-      welcome_message: 'Hey %{username}, welcome to Los Pits!'
+      welcome_message: 'Hey %{username}, welcome to Los Pits!' 

@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   end
 
   #servicios
-  resources :servicios_auto, only: [:new]
+  resources :servicios_auto, only: [:new, :index]
   post '/servicios_auto', to: 'servicios_auto#create'
   get '/obtener_patente', to: 'servicios_auto#obtener_patente'
 

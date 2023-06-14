@@ -1,0 +1,30 @@
+<div class="bg-gray-100 p-4">
+  <h1 class="text-2xl font-bold mb-4">Listado de Servicios</h1>
+
+  <table class="border-collapse">
+    <thead>
+      <tr>
+        <th class="p-4 font-bold">ID</th>
+        <th class="p-4 font-bold">Vehículo</th>
+        <th class="p-4 font-bold">Tipo de Servicio</th>
+        <th class="p-4 font-bold">Patente del Vehículo</th>
+        <th class="p-4 font-bold">Fecha</th>
+        <th class="p-4 font-bold">Hora</th>
+        <th class="p-4 font-bold">Comentario</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @servicios.each do |servicio| %>
+        <tr>
+          <td class="p-4 border border-gray-300"><%= servicio.id %></td>
+          <td class="p-4 border border-gray-300"><%= servicio.modelo_vehiculo %></td>
+          <td class="p-4 border border-gray-300"><%= servicio.tipo_servicio %></td>
+          <td class="p-4 border border-gray-300"><%= servicio.patente_vehiculo %></td>
+          <td class="p-4 border border-gray-300"><%= servicio.fecha %></td>
+          <td class="p-4 border border-gray-300"><%= servicio.hora.strftime("%H:%M:%S") %></td>
+          <td class="p-4 border border-gray-300"><%= servicio.comentario %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

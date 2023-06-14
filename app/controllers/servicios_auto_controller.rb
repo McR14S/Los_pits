@@ -6,6 +6,11 @@ class ServiciosAutoController < ApplicationController
     @vehiculos = Current.user.vehiculos if Current.user
   end
 
+  def index
+    # Aquí puedes implementar la lógica para mostrar servicios
+    @servicios = Servicio.all
+  end
+
   def create
     @servicio = Servicio.new(servicio_params)
     if @servicio.save
@@ -23,7 +28,6 @@ class ServiciosAutoController < ApplicationController
   
     render json: { patente: patente }
   end
-  
 
   private
 

@@ -1,5 +1,23 @@
 class ServiciosAutoController < ApplicationController
   include Authentication
+  protect_from_forgery with: :exception
+
+  def createPDF
+    @servicio = Servicio.new(servicio_params)
+
+    if @servicio.save
+      respond_to do |format|
+        format.html { redirect_to @servicio }
+        format.pdf do
+          pdf = generate_pdf(@servicio)
+          send_data pdf.render, filename: 'servicio.pdf', type: 'application/pdf', disposition: 'attachment'
+        end
+      end
+    else
+      render :new
+    end
+  end
+  
 
   def new
     @servicio = Servicio.new
@@ -39,6 +57,21 @@ class ServiciosAutoController < ApplicationController
   def authorize_admin!
     unless Current.user.superadmin?
       redirect_to root_path, alert: 'No tienes permisos de administrador.'
+    end
+  end
+
+  def generate_pdf(servicio)
+    # Aquí debes utilizar una biblioteca de generación de PDF, como Prawn o Wicked PDF, para generar el PDF con los datos del servicio.
+    # A continuación se muestra un ejemplo utilizando Prawn:
+    
+    Prawn::Document.new do
+      # Genera el contenido del PDF utilizando los datos del servicio
+      text "Tipo de servicio: #{servicio.tipo_servicio}"
+      text "Modelo de vehículo: #{servicio.modelo_vehiculo}"
+      text "Patente: #{servicio.patente_vehiculo}"
+      text "Fecha: #{servicio.fecha}"
+      text "Hora: #{servicio.hora}"
+      text "Comentario: #{servicio.comentario}"
     end
   end
   

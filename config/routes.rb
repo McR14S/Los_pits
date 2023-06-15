@@ -20,8 +20,11 @@ Rails.application.routes.draw do
   resources :favorites, only: [:index, :create, :destroy], param: :product_id
 
   # Usuarios
-  resources :users, only: [:index, :edit], path: '/user', param: :username
+  resources :users, only: [:index, :edit, :update, :destroy], path: '/user', param: :id
   get '/user', to: 'users#index', as: 'user_index'
+  # Ruta para actualizar los datos del usuario
+  patch '/users/:id', to: 'users#update', as: 'user_update'
+  delete '/users/:id', to: 'users#destroy', as: 'user_destroy'
 
   resources :categories, except: :show
 
@@ -34,4 +37,9 @@ Rails.application.routes.draw do
   # Vehiculo
   resources :vehiculos, only: [:new]
   post '/vehiculos', to: 'vehiculos#create'
+
+  #pdf
+  resources :servicios_auto do
+    post :pdf, on: :collection
+  end
 end

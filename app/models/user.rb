@@ -7,7 +7,7 @@ class User < ApplicationRecord
             message: :invalid
         }
     validates :username, presence: true, uniqueness: true, 
-        length: { in: 3..15 },
+        length: { in: 5..15 },
         format: {
             with: /\A[a-zA-Z0-9-]+\z/,
             message: :invalid
@@ -19,8 +19,6 @@ class User < ApplicationRecord
     has_many :vehiculos, dependent: :destroy
 
     before_save :downcase_attributes
-
-    attr_accessor :admin  # Agrega esta línea para definir el atributo admin
 
     private
     

@@ -1,29 +1,81 @@
-<h1>Editar Perfil de <%= @user.username %></h1>
+<div class="max-w-md mx-auto">
+  <h1 class="text-2xl font-semibold mb-4">Editar Perfil de <%= @user.username %></h1>
 
-<%= form_for(@user, url: edit_user_path(@user.username), method: :patch) do |f| %>
-  <%= render 'shared/error_messages', object: @user %>
+  <%= form_for(@user, url: user_update_path(@user.id), method: :patch) do |f| %>
+    <div id="error_explanation" class="bg-red-100 text-red-700 px-4 py-3 rounded mb-4">
+      <% if @user.errors.any? %>
+        <h2 class="font-semibold"><%= pluralize(@user.errors.count, "error") %> prohibited this <%= @user.class.name.downcase %> from being saved:</h2>
+        <ul class="list-disc list-inside mt-2">
+          <% @user.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      <% end %>
+    </div>
 
-  <div class="field">
-    <%= f.label :username %>
-    <%= f.text_field :username %>
-  </div>
+    <div class="mb-4">
+      <%= f.label :username, class: "block font-semibold" %>
+      <%= f.text_field :username, class: "form-input mt-1 block w-full" %>
+    </div>
 
-  <div class="field">
-    <%= f.label :email %>
-    <%= f.email_field :email %>
-  </div>
+    <div class="mb-4">
+      <%= f.label :email, class: "block font-semibold" %>
+      <%= f.email_field :email, class: "form-input mt-1 block w-full" %>
+    </div>
 
-  <div class="field">
-    <%= f.label :admin %>
-    <%= f.check_box :admin %>
-  </div>
+    <div class="mb-4">
+      <label class="block font-semibold">
+        <%= f.check_box :admin, class: "form-checkbox" %>
+        <span class="ml-2">Empleado</span>
+      </label>
+    </div>
 
-  <div class="field">
-    <%= f.label :superadmin %>
-    <%= f.check_box :superadmin %>
-  </div>
+    <div class="mb-4">
+      <label class="block font-semibold">
+        <%= f.check_box :superadmin, class: "form-checkbox" %>
+        <span class="ml-2">Administrador</span>
+      </label>
+    </div>
 
-  <div class="actions">
-    <%= f.submit 'Guardar cambios' %>
-  </div>
-<% end %>
+    <div class="flex justify-between">
+        <%= f.submit 'Guardar cambios', class: "bg-blue-500 hover:bg-blue-700 text-white font-semibold px-4 py-2 rounded" %>
+        <%= link_to 'Volver', user_index_path, class: "bg-black text-orange-500 hover:text-blue-700 font-semibold rounded py-2 px-4" %>
+ </div>
+  <% end %>
+
+  <button class="delete-user-btn text-red-500 hover:text-red-700 font-semibold ml-2" data-user-id="<%= @user.id %>">Eliminar</button>
+
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+  $(document).ready(function() {
+    $('.delete-user-btn').on('click', function() {
+      var userId = $(this).data('user-id');
+      var confirmation = confirm('¿Estás seguro de que deseas eliminar este usuario?');
+
+      if (confirmation) {
+        var csrfToken = $('meta[name=csrf-token]').attr('content');
+
+        $.ajax({
+          url: '/user/' + userId,
+          method: 'DELETE',
+          dataType: 'script',
+          beforeSend: function(xhr) {
+            xhr.setRequestHeader('X-CSRF-Token', csrfToken);
+          },
+          success: function() {
+            // Redirigir a user_index_path
+            window.location.href = '<%= user_index_path %>';
+          },
+          error: function(jqXHR, textStatus, errorThrown) {
+            // Manejar el error
+            var errorMessage = 'Ocurrió un error al eliminar el usuario: ' + textStatus;
+            alert(errorMessage);
+          }
+        });
+      }
+    });
+  });
+</script>

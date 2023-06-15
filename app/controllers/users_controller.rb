@@ -14,29 +14,40 @@ class UsersController < ApplicationController
     @user = User.new
   end
 
-  def create
-    @user = User.new(user_params)
-    if @user.save
-      redirect_to users_path, notice: 'Usuario creado exitosamente.'
+  def edit
+    @user = usuario
+  end
+
+  def update
+    @user = usuario
+    if @user.update(user_params)
+      # La actualización fue exitosa
+      redirect_to user_path(@user), notice: "El perfil se ha actualizado correctamente."
     else
-      render :new, status: :unprocessable_entity
+      # Hubo un error en la actualización, muestra el formulario nuevamente
+      render :edit, status: :unprocessable_entity
     end
   end
 
-  def edit
-    @user = User.find(params[:id])
-  end
-
+  #Eliminacion  con el ID
   def destroy
     @user = User.find(params[:id])
-    @user.destroy
-    redirect_to users_path, notice: 'Usuario eliminado exitosamente.'
+    if @user.destroy
+      head :no_content
+    else
+      render json: { error: 'No se pudo eliminar el usuario' }, status: :unprocessable_entity
+    end
   end
-
+  
+  
   private
 
+  def usuario
+    @user ||= User.find(params[:id])
+  end
+
   def user_params
-    params.require(:user).permit(:name, :email, :password, :admin, :superadmin)
+    params.require(:user).permit(:username, :email, :admin, :superadmin)
   end
 
   def authorize_superadmin!

@@ -38,8 +38,4 @@ Rails.application.routes.draw do
   resources :vehiculos, only: [:new]
   post '/vehiculos', to: 'vehiculos#create'
 
-  #pdf
-  resources :servicios_auto do
-    post :pdf, on: :collection
-  end
 end

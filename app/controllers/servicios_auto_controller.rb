@@ -2,22 +2,6 @@ class ServiciosAutoController < ApplicationController
   include Authentication
   protect_from_forgery with: :exception
 
-  def createPDF
-    @servicio = Servicio.new(servicio_params)
-
-    if @servicio.save
-      respond_to do |format|
-        format.html { redirect_to @servicio }
-        format.pdf do
-          pdf = generate_pdf(@servicio)
-          send_data pdf.render, filename: 'servicio.pdf', type: 'application/pdf', disposition: 'attachment'
-        end
-      end
-    else
-      render :new
-    end
-  end
-  
 
   def new
     @servicio = Servicio.new

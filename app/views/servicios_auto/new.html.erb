@@ -3,7 +3,7 @@
     <h1 class="text-3xl font-bold mb-6">Agendar Servicio</h1>
 
     <%= form_with(model: @servicio, url: servicios_auto_path, local: true) do |form| %>
-      
+
       <% if @servicio.errors.any? %>
         <div class="mb-4 bg-red-100 border border-red-400 text-red-700 px-4 py-2 rounded">
           <ul>
@@ -47,7 +47,7 @@
       </div>
 
       <div class="mb-6">
-        <%= form.submit 'Enviar', class: "bg-orange-500 text-white font-bold py-2 px-4 rounded hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2", id: "submit-btn" %>
+        <%= form.submit 'Enviar', class: "bg-orange-500 text-white font-bold py-2 px-4 rounded hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2" %>
       </div>
     <% end %>
   </div>
@@ -57,7 +57,6 @@
   document.addEventListener('turbo:load', function() {
     var modeloVehiculoSelect = document.getElementById('modelo_vehiculo');
     var patenteVehiculoField = document.getElementById('patente-field');
-    var submitBtn = document.getElementById('submit-btn');
 
     modeloVehiculoSelect.addEventListener('change', function() {
       var selectedModeloVehiculo = this.value;
@@ -70,19 +69,6 @@
         .catch(error => {
           console.error('Error al obtener la patente:', error);
         });
-    });
-
-    submitBtn.addEventListener('click', function(event) {
-      event.preventDefault();
-      
-      var confirmed = confirm("¿Deseas descargar un PDF con los datos del formulario?");
-
-      if (confirmed) {
-        var form = document.querySelector('form');
-        form.target = '_blank';
-        form.action = '<%= servicios_auto_path(format: :pdf) %>';
-        form.submit();
-      }
     });
   });
 </script>

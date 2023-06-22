@@ -22,6 +22,7 @@ Rails.application.routes.draw do
   # Usuarios
   resources :users, only: [:index, :edit, :update, :destroy], path: '/user', param: :id
   get '/user', to: 'users#index', as: 'user_index'
+  get '/user/:username', to: 'users#show', as: :user_profile
   # Ruta para actualizar los datos del usuario
   patch '/users/:id', to: 'users#update', as: 'user_update'
   delete '/users/:id', to: 'users#destroy', as: 'user_destroy'

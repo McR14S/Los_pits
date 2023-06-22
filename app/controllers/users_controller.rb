@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :authorize_superadmin!
-  skip_before_action :protect_pages, only: :show
+  skip_before_action :protect_pages, only: [:show]
 
   def show
     @user = User.find_by!(username: params[:username])

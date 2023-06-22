@@ -11,6 +11,7 @@
         <th class="p-4 font-bold">Fecha</th>
         <th class="p-4 font-bold">Hora</th>
         <th class="p-4 font-bold">Comentario</th>
+        <th class="p-4 font-bold">Completado</th>
       </tr>
     </thead>
     <tbody>
@@ -23,8 +24,18 @@
           <td class="p-4 border border-gray-300"><%= servicio.fecha %></td>
           <td class="p-4 border border-gray-300"><%= servicio.hora.strftime("%H:%M:%S") %></td>
           <td class="p-4 border border-gray-300"><%= servicio.comentario %></td>
+          <td class="p-4 border border-gray-300">
+            <%= form_with model: servicio.completed, local: true do |form| %>
+              <%= form.check_box :completed, class: "mr-2" %>
+              <%= form.label :completed, servicio.completed ? "Verdadero" : "Falso" %>
+            <% end %>
+          </td>
         </tr>
       <% end %>
     </tbody>
   </table>
+
+  <div class="mt-4 text-right">
+    <%= submit_tag "Guardar", class: "btn btn-primary" %>
+  </div>
 </div>

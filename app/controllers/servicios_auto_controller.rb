@@ -6,6 +6,7 @@ class ServiciosAutoController < ApplicationController
   def new
     @servicio = Servicio.new
     @vehiculos = Current.user.vehiculos if Current.user
+    get_first_patente
   end
 
   def index
@@ -32,14 +33,19 @@ class ServiciosAutoController < ApplicationController
     render json: { patente: patente }
   end
 
+  def get_first_patente
+    @first_patente = Vehiculo.first&.patente_vehiculo
+  end
+  
+
   private
 
   def servicio_params
-    params.require(:servicio).permit(:tipo_servicio, :modelo_vehiculo, :patente_vehiculo, :fecha, :hora, :comentario)
+    params.require(:servicio).permit(:tipo_servicio, :modelo_vehiculo, :patente_vehiculo, :fecha, :hora, :comentario, :completed)
   end
 
   def authorize_admin!
-    unless Current.user.superadmin?
+    unless Current.user.admin? || Current.user.superadmin?
       redirect_to root_path, alert: 'No tienes permisos de administrador.'
     end
   end

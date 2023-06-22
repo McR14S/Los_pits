@@ -37,5 +37,4 @@ Rails.application.routes.draw do
   # Vehiculo
   resources :vehiculos, only: [:new]
   post '/vehiculos', to: 'vehiculos#create'
-
 end

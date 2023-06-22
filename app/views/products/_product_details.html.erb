@@ -6,7 +6,9 @@
 
   <p class='description'>Descripcion: <%= product.description %></p>
 
-  <span class='price'>Precio: $<%= product.price %></span>
+  <p class='stock'>Stock: <%= product.stock %></p>
+
+  <span class='price'>Precio: $<%= number_with_delimiter(product.price, delimiter: '.', separator: ',') %></span>
 
   
 </div>

@@ -18,6 +18,10 @@
     </div>
 
     <div>
+        <%= form.number_field :stock, placeholder: 'Stock', class: "rounded-2xl border-gray-200 mb-4 w-full" %>
+    </div>
+
+    <div>
         <%= form.collection_select :category_id, Category.all.order(name: :asc), :id, :name, { prompt: t(".category_placeholder") }, { class: "rounded-2xl border-gray-200 mb-4 w-full text-gray-500"} %>
     </div>
 

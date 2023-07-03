@@ -17,6 +17,8 @@ class ServiciosAutoController < ApplicationController
     @servicio = Servicio.new(servicio_params)
     if @servicio.save
       puts @servicio.id
+
+      @ultima_boleta_generada = true # Variable para indicar que se generó una boleta exitosamente
       redirect_to new_servicios_auto_path, notice: '¡El servicio ha sido agendado exitosamente puede hacer click en mostrar boleta!'
   
     else

@@ -3,6 +3,9 @@ es:
     edit:
       common:
         not_found: 'Usuario no encontrado'
+    show:
+      common:
+        not_found: "Usuario Modificado"
   app_name: 'Los Pits'
   meta_title: ¡Pagina especializada para tu vehiculo!'
   activerecord:

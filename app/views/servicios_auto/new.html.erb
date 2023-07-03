@@ -2,7 +2,7 @@
   <div class="w-full max-w-md p-6 bg-white rounded-md shadow-md">
     <h1 class="text-3xl font-bold mb-6">Agendar Servicio</h1>
 
-    <%= form_with(model: @servicio, url: servicios_auto_path, local: true) do |form| %>
+    <%= form_with(model: @servicio, url: servicios_auto_path, local: true, data: { turbo: "false" }) do |form| %>
 
       <% if @servicio.errors.any? %>
         <div class="mb-4 bg-red-100 border border-red-400 text-red-700 px-4 py-2 rounded">
@@ -47,23 +47,23 @@
       </div>
 
       <div class="mb-6">
-        <%= form.submit 'Enviar', class: "bg-orange-500 text-white font-bold py-2 px-4 rounded hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2" %>
+        <%= form.button 'Enviar', class: "bg-orange-500 text-white font-bold py-2 px-4 rounded hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2", id: "enviar-btn" %>
       </div>
     <% end %>
 
-    <%= link_to 'Mostrar última boleta', mostrar_ultima_boleta_path, class: "bg-orange-500 text-white font-bold py-2 px-4 rounded hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2", target: '_blank' %>
+    <div id="ultima-boleta" style="display: none;">
+      <%= link_to 'Mostrar última boleta', mostrar_ultima_boleta_path, class: "bg-orange-500 text-white font-bold py-2 px-4 rounded hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2", target: '_blank' %>
+    </div>
+
   </div>
 </div>
-
-
-
-
-
 
 <script>
   document.addEventListener('turbo:load', function() {
     var modeloVehiculoSelect = document.getElementById('modelo_vehiculo');
     var patenteVehiculoField = document.getElementById('patente-field');
+    var enviarBtn = document.getElementById('enviar-btn');
+    var ultimaBoleta = document.getElementById('ultima-boleta');
 
     modeloVehiculoSelect.addEventListener('change', function() {
       var selectedModeloVehiculo = this.value;
@@ -75,6 +75,28 @@
         })
         .catch(error => {
           console.error('Error al obtener la patente:', error);
+        });
+    });
+
+    enviarBtn.addEventListener('click', function(event) {
+      event.preventDefault(); // Evita el envío del formulario por defecto
+      
+      var form = enviarBtn.closest('form');
+      
+      fetch(form.action, {
+        method: form.method,
+        body: new FormData(form)
+      })
+        .then(response => {
+          if (response.ok) {
+            ultimaBoleta.style.display = 'block';
+            form.reset(); // Opcional: Reiniciar el formulario después de enviarlo
+          } else {
+            console.error('Error al enviar el formulario');
+          }
+        })
+        .catch(error => {
+          console.error('Error al enviar el formulario:', error);
         });
     });
   });

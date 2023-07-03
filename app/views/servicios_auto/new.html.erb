@@ -50,8 +50,15 @@
         <%= form.submit 'Enviar', class: "bg-orange-500 text-white font-bold py-2 px-4 rounded hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2" %>
       </div>
     <% end %>
+
+    <%= link_to 'Mostrar última boleta', mostrar_ultima_boleta_path, class: "bg-orange-500 text-white font-bold py-2 px-4 rounded hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2", target: '_blank' %>
   </div>
 </div>
+
+
+
+
+
 
 <script>
   document.addEventListener('turbo:load', function() {

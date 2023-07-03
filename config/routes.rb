@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+
+  #Boleta
+  get '/boleta/:id', to: 'boletas#generar', as: 'generar_boleta'
+  get '/boletas/ultima', to: 'boletas#mostrar_ultima_boleta', as: 'mostrar_ultima_boleta'
+
+
   # Establece la página home como la página principal
   root 'pages#home'
 

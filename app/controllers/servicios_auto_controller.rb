@@ -2,7 +2,6 @@ class ServiciosAutoController < ApplicationController
   include Authentication
   protect_from_forgery with: :exception
 
-
   def new
     @servicio = Servicio.new
     @vehiculos = Current.user.vehiculos if Current.user
@@ -14,16 +13,18 @@ class ServiciosAutoController < ApplicationController
     @servicios = Servicio.all
   end
   
-
   def create
     @servicio = Servicio.new(servicio_params)
     if @servicio.save
-      redirect_to root_path, notice: 'El servicio ha sido agendado exitosamente.'
+      puts @servicio.id
+      redirect_to new_servicios_auto_path, notice: '¡El servicio ha sido agendado exitosamente puede hacer click en mostrar boleta!'
+  
     else
       @vehiculos = Current.user.vehiculos if Current.user
       render :new, status: :unprocessable_entity
     end
   end
+    
 
   def obtener_patente
     modelo = params[:modelo]
